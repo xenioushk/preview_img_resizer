@@ -10,6 +10,7 @@ function bwl_resize_preview_img($source_url)
     $source_url_parts = pathinfo($source_url);
     $filename = $source_url_parts['filename'];
     $extension = $source_url_parts['extension'];
+    $destFolder = 'resized_images/';
 
     //define the quality from 1 to 100
     $quality = 15;
@@ -20,7 +21,7 @@ function bwl_resize_preview_img($source_url)
     $height;
 
     //define any width that you want as the output. mine is 200px.
-    $after_width = 570;
+    $after_width = 900;
 
     //resize only when the original image is larger than expected with.
     //this helps you to avoid from unwanted resizing.
@@ -41,9 +42,15 @@ function bwl_resize_preview_img($source_url)
         if ($extension == 'jpg' || $extension == 'jpeg' || $extension == 'JPG' || $extension == 'JPEG') {
             //then return the image as a jpeg image for the next step
             $img = imagecreatefromjpeg($source_url);
+            $imgResized = imagescale($img, $after_width, $after_height, $quality);
+            $previewURL = $destFolder . $filename . '.' . $extension;
+            imagejpeg($imgResized, $destFolder . $filename . '.' . $extension);
         } elseif ($extension == 'png' || $extension == 'PNG') {
             //then return the image as a png image for the next step
             $img = imagecreatefrompng($source_url);
+            $imgResized = imagescale($img, $after_width, $after_height, $quality);
+            $previewURL = $destFolder . $filename . '.' . $extension;
+            imagepng($imgResized, $destFolder . $filename . '.' . $extension);
         } else {
             //show an error message if the file extension is not available
             echo 'image extension is not supporting';
@@ -52,19 +59,19 @@ function bwl_resize_preview_img($source_url)
         //HERE YOU GO :)
         //Let's do the resize thing
         //imagescale([returned image], [width of the resized image], [height of the resized image], [quality of the resized image]);
-        $imgResized = imagescale($img, $after_width, $after_height, $quality);
 
-        //now save the resized image with a suffix called "-resized" and with its extension. 
-        //    imagejpeg($imgResized, $filename . '-resized.'.$extension);
 
-        $dest_folder = 'resized_images/';
 
-        imagejpeg($imgResized, $dest_folder . $filename . '.' . $extension);
+
+
 
         //Finally frees any memory associated with image
         //**NOTE THAT THIS WONT DELETE THE IMAGE
         imagedestroy($img);
         imagedestroy($imgResized);
-        echo 'successfully resized';
+
+
+
+        echo "<p><a href='$previewURL' target='_blank' class='preview'>Preview</a></p>";
     }
 }
