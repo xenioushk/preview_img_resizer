@@ -2,17 +2,17 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preivew Image Resizer</title>
-    <link rel="stylesheet" href="assets/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preivew Image Resizer</title>
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
 
 <body>
 
-    <div class="container">
+  <div class="container">
 
-        <?php
+    <?php
 
 
         // Read All the files of a folder.
@@ -44,9 +44,9 @@
 
         ?>
 
-    </div>
+  </div>
 
-    <script src="assets/scripts.js"></script>
+  <script src="assets/scripts.js"></script>
 
 </body>
 
